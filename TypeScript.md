@@ -129,6 +129,40 @@ count = function(a, b) {
 }
 ```
 
+直接对变量进行函数的类型声明：
+
+```TS
+const add: (x: number, y: number) => number
+```
+
+在接口中对函数的类型声明:
+
+```ts
+interface Function {
+	(x: number, y: number): number
+} // 之所以在接口中的写法不同，是因为接口本身是对属性及其类型的定义，即 property: type
+```
+
+思考以下代码：
+
+```ts
+interface Props {
+    (x: number, y: number): void
+}
+
+function runCallBack<T extends Props>(callback: T) {
+    setTimeout(callback, 2000)
+}
+
+function add(x: number, y: number) {
+    console.log(x + y)
+}
+
+runCallBack(() => add(5, 6))
+```
+
+
+
 ### 关于数组
 
 ​	声明数组类型
